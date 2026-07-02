@@ -7,15 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── 导航栏滚动效果 ───
   const navbar = document.querySelector('.navbar');
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
     if (navbar) {
-      if (y > 100) {
-        navbar.style.background = 'rgba(11, 13, 20, 0.95)';
-        navbar.style.borderBottomColor = 'var(--border)';
-      } else {
-        navbar.style.background = 'rgba(11, 13, 20, 0.8)';
-        navbar.style.borderBottomColor = 'transparent';
-      }
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
     }
   });
 

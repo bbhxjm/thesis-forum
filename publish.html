@@ -101,7 +101,7 @@
                     <h4>资源</h4>
                     <a href="explore.html">学术工具</a>
                     <a href="topics.html">热门话题</a>
-                    <a href="#">模板下载</a>
+                    <a href="templates.html">论文模板</a>
                 </div>
                 <div class="footer-col">
                     <h4>联系</h4>
@@ -111,7 +111,6 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Made with ❤️ · 免费开源 · 一键部署</p>
         </div>
     </footer>
 
@@ -170,20 +169,35 @@
         }
 
         const user = Auth.currentUser();
-        const post = Posts.create({
-            title,
-            content,
-            desc: desc || title.slice(0, 120),
-            tags: Array.from(selectedTags),
-            authorId: user.id,
-            authorName: user.username,
-            authorTitle: user.title || '学者'
-        });
+        if (!user) {
+            errorEl.textContent = '登录已过期，请重新登录';
+            errorEl.style.display = 'block';
+            return;
+        }
 
-        showToast('🎉 发布成功！', 'success');
-        setTimeout(() => {
+        try {
+            const post = Posts.create({
+                title,
+                content,
+                desc: desc || title.slice(0, 120),
+                tags: Array.from(selectedTags),
+                authorId: user.id,
+                authorName: user.username,
+                authorTitle: user.title || '学者'
+            });
+
+            if (!post || !post.id) {
+                errorEl.textContent = '发布失败，请重试';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            // 直接跳转到帖子详情页
             window.location.href = `post.html?id=${post.id}`;
-        }, 300);
+        } catch (err) {
+            errorEl.textContent = '发布异常：' + err.message;
+            errorEl.style.display = 'block';
+        }
     });
     </script>
 </body>

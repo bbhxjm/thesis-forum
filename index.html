@@ -33,7 +33,6 @@
 
     <!-- ====== HERO 大 banner ====== -->
     <section class="hero">
-        <div class="hero-bg"></div>
         <div class="container hero-content">
             <div class="hero-badge">🎓 中国学术交流社区</div>
             <h1 class="hero-title">每一篇论文，<br>都值得被认真对待</h1>
@@ -137,7 +136,7 @@
                     <h4>资源</h4>
                     <a href="explore.html">学术工具</a>
                     <a href="topics.html">热门话题</a>
-                    <a href="#">模板下载</a>
+                    <a href="templates.html">论文模板</a>
                 </div>
                 <div class="footer-col">
                     <h4>联系</h4>
@@ -147,7 +146,6 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>Made with ❤️ · 免费开源 · 一键部署</p>
         </div>
     </footer>
 
@@ -171,6 +169,8 @@
             <a href="explore.html" class="drawer-link">🔍 探索</a>
             <a href="topics.html" class="drawer-link">📌 话题</a>
             <a href="about.html" class="drawer-link">ℹ️ 关于</a>
+            <hr style="border-color:var(--border);margin:12px 0">
+            <a href="templates.html" class="drawer-link">📄 论文模板</a>
             <hr style="border-color:var(--border);margin:12px 0">
             <a href="publish.html" class="drawer-link">✍️ 发布帖子</a>
             <a href="login.html" class="drawer-link">🔐 登录</a>
@@ -299,7 +299,7 @@
         if (searchKeyword) {
             const info = document.createElement('div');
             info.style.cssText = 'margin-bottom:16px;padding:14px 20px;background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid var(--border);font-size:14px;color:var(--text-secondary)';
-            info.innerHTML = `🔍 搜索 "<strong>${searchKeyword}</strong>" 共找到 <strong>${allFilteredPosts.length}</strong> 条结果 &nbsp;<a href="index.html" style="color:var(--accent-light);font-size:13px">✕ 清除搜索</a>`;
+            info.innerHTML = `🔍 搜索 "<strong>${searchKeyword}</strong>" 共找到 <strong>${allFilteredPosts.length}</strong> 条结果 &nbsp;<a href="index.html" style="color:var(--primary);font-size:13px">✕ 清除搜索</a>`;
             container.innerHTML = '';
             container.appendChild(info);
         } else {
