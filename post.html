@@ -130,7 +130,7 @@
     <script src="app.js"></script>
     <script>
     // =============================================
-    // 帖子详情页脚本
+    // 帖子详情页脚本（异步 API）
     // =============================================
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -149,11 +149,11 @@
         document.getElementById('postContent').innerHTML = '';
         document.getElementById('commentsSection').style.display = 'none';
     } else {
-        loadPost();
+        (async function() { await loadPost(); })();
     }
 
-    function loadPost() {
-        const post = Posts.getById(postId);
+    async function loadPost() {
+        const post = await Posts.getById(postId);
         if (!post) {
             document.getElementById('postHeader').innerHTML = `
                 <div class="empty-state">
@@ -229,8 +229,8 @@
         renderComments();
     }
 
-    function renderComments() {
-        const comments = Comments.byPost(postId);
+    async function renderComments() {
+        const comments = await Comments.byPost(postId);
         document.getElementById('commentCount').textContent = comments.length;
 
         const container = document.getElementById('commentsContainer');
@@ -264,7 +264,7 @@
     }
 
     // 发表评论
-    document.getElementById('commentSubmit')?.addEventListener('click', function() {
+    document.getElementById('commentSubmit')?.addEventListener('click', async function() {
         const input = document.getElementById('commentInput');
         const content = input.value.trim();
         if (!content) {
@@ -278,16 +278,20 @@
         }
 
         const user = Auth.currentUser();
-        Comments.add({
-            postId,
-            authorId: user.id,
-            authorName: user.username,
-            content
-        });
+        try {
+            await Comments.add({
+                postId,
+                authorId: user.id,
+                authorName: user.username,
+                content
+            });
 
-        input.value = '';
-        showToast('评论发表成功', 'success');
-        renderComments();
+            input.value = '';
+            showToast('评论发表成功', 'success');
+            await renderComments();
+        } catch (e) {
+            showToast('评论发表失败：' + e.message, 'error');
+        }
     });
 
     // 回车发表评论

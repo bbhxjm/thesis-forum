@@ -136,11 +136,11 @@
         `;
         document.querySelector('.posts-section').style.display = 'none';
     } else {
-        loadProfile();
+        (async function() { await loadProfile(); })();
     }
 
-    function loadProfile() {
-        const profile = Auth.getProfile(userId);
+    async function loadProfile() {
+        const profile = await Auth.getProfile(userId);
         if (!profile) {
             document.getElementById('profileSection').innerHTML = `
                 <div class="empty-state">

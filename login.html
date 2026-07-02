@@ -167,7 +167,7 @@
     });
 
     // 登录
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('loginPassword').value;
@@ -175,7 +175,7 @@
         const errorEl = document.getElementById('loginError');
         errorEl.style.display = 'none';
 
-        const result = Auth.login({ username, password });
+        const result = await Auth.login({ username, password });
         if (result.ok) {
             // 跳回之前页面或首页
             const redirect = new URLSearchParams(window.location.search).get('redirect') || 'index.html';
@@ -187,7 +187,7 @@
     });
 
     // 注册
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const username = document.getElementById('regUsername').value.trim();
         const email = document.getElementById('regEmail').value.trim();
@@ -197,7 +197,7 @@
         const errorEl = document.getElementById('regError');
         errorEl.style.display = 'none';
 
-        const result = Auth.register({ username, email, password, title });
+        const result = await Auth.register({ username, email, password, title });
         if (result.ok) {
             window.location.href = 'index.html';
         } else {

@@ -121,24 +121,27 @@
         { icon: '🤖', name: 'AI 学术', desc: 'AI 工具辅助学术研究的经验与讨论' }
     ];
 
-    function countTagPosts(tagName) {
-        return Posts.all().filter(p => p.tags && p.tags.some(t => t.includes(tagName))).length;
+    async function countTagPosts(tagName) {
+        const all = await Posts.all();
+        return all.filter(p => p.tags && p.tags.some(t => t.includes(tagName))).length;
     }
 
-    const container = document.getElementById('topicsContainer');
-    container.innerHTML = topics.map(t => {
-        const count = countTagPosts(t.name);
-        return `
-            <a href="index.html?search=${encodeURIComponent(t.name)}" class="topic-card">
-                <div class="topic-card-icon">${t.icon}</div>
-                <div class="topic-card-content">
-                    <h3>${t.name}</h3>
-                    <p>${t.desc}</p>
-                </div>
-                <div class="topic-card-count">${count} 个讨论 →</div>
-            </a>
-        `;
-    }).join('');
+    (async function() {
+        const container = document.getElementById('topicsContainer');
+        const counts = await Promise.all(topics.map(t => countTagPosts(t.name)));
+        container.innerHTML = topics.map((t, i) => {
+            return `
+                <a href="index.html?search=${encodeURIComponent(t.name)}" class="topic-card">
+                    <div class="topic-card-icon">${t.icon}</div>
+                    <div class="topic-card-content">
+                        <h3>${t.name}</h3>
+                        <p>${t.desc}</p>
+                    </div>
+                    <div class="topic-card-count">${counts[i]} 个讨论 →</div>
+                </a>
+            `;
+        }).join('');
+    })();
     </script>
 </body>
 </html>

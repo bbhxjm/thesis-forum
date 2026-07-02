@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── 投票功能 (动态绑定) ───
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', async function(e) {
     const voteBtn = e.target.closest('.vote-btn');
     if (!voteBtn) return;
 
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const count = card.querySelector('.vote-num');
     if (!count) return;
 
-    const result = Posts.vote(postId, Auth.currentUser().id, direction);
+    const result = await Posts.vote(postId, Auth.currentUser().id, direction);
     if (result) {
       count.textContent = DB.formatNum(result.votes);
       // 更新按钮样式
@@ -147,14 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─── 帖子点击 ───
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', async function(e) {
     const title = e.target.closest('.post-title');
     if (!title) return;
     const card = title.closest('.post-card');
     if (!card) return;
     const postId = card.dataset.postId;
     if (postId) {
-      Posts.addView(postId);
+      await Posts.addView(postId);
       window.location.href = `post.html?id=${postId}`;
     }
   });

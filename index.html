@@ -182,7 +182,7 @@
     <script src="app.js"></script>
     <script>
     // =============================================
-    // 首页专用脚本 — 动态渲染帖子列表
+    // 首页专用脚本 — 动态渲染帖子列表（异步 API）
     // =============================================
 
     let currentTag = '全部';
@@ -196,10 +196,10 @@
     const searchKeyword = urlParams.get('search') || '';
 
     // 初始化统计数字
-    function updateStats() {
-        const postCount = Posts.count();
-        const userCount = Auth.count();
-        const commentCount = Comments.count();
+    async function updateStats() {
+        const [postCount, userCount, commentCount] = await Promise.all([
+            Posts.count(), Auth.count(), Comments.count()
+        ]);
         document.getElementById('statPosts').textContent = DB.formatNum(postCount);
         document.getElementById('statUsers').textContent = DB.formatNum(userCount);
         const rate = postCount > 0 ? Math.round((commentCount / Math.max(1, postCount)) * 30 + 70) : 96;
@@ -207,14 +207,23 @@
     }
 
     // 获取并筛选帖子
-    function getFilteredPosts() {
-        let posts;
+    async function getFilteredPosts() {
         if (searchKeyword) {
-            posts = Posts.search(searchKeyword);
+            return await Posts.search(searchKeyword);
+        } else if (currentTag && currentTag !== '全部') {
+            const posts = await Posts.byTag(currentTag);
+            return sortPostList(posts, currentSort);
         } else {
-            posts = Posts.byTag(currentTag);
+            return await Posts.sorted(currentSort);
         }
-        return Posts.sorted(posts, currentSort);
+    }
+
+    // 本地排序工具
+    function sortPostList(list, sortBy) {
+        const arr = [...list];
+        if (sortBy === 'newest') return arr.sort((a, b) => b.createdAt - a.createdAt);
+        if (sortBy === 'unanswered') return arr.sort((a, b) => (a.commentCount || 0) - (b.commentCount || 0));
+        return arr.sort((a, b) => ((b.votes || 0) * 3 + (b.commentCount || 0) * 2 + (b.views || 0) * 0.5) - ((a.votes || 0) * 3 + (a.commentCount || 0) * 2 + (a.views || 0) * 0.5));
     }
 
     // 渲染帖子卡片
@@ -275,13 +284,13 @@
     }
 
     // 渲染帖子列表
-    function renderPosts() {
+    async function renderPosts() {
         const container = document.getElementById('postsContainer');
         const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-        allFilteredPosts = getFilteredPosts();
+        allFilteredPosts = await getFilteredPosts();
 
-        if (allFilteredPosts.length === 0) {
+        if (!allFilteredPosts || allFilteredPosts.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-icon">📭</div>
@@ -332,24 +341,26 @@
     });
 
     // 按话题筛选
-    window.filterPostsByTag = function(tag) {
+    window.filterPostsByTag = async function(tag) {
         currentTag = tag;
         currentSort = document.querySelector('.sort-tab.active')?.dataset?.sort || 'hot';
-        renderPosts();
+        await renderPosts();
         window.scrollTo({ top: document.querySelector('.posts-section').offsetTop - 90, behavior: 'smooth' });
     };
 
     // 排序
-    window.sortPosts = function(sortName) {
+    window.sortPosts = async function(sortName) {
         const map = { '最热': 'hot', '最新': 'newest', '未回复': 'unanswered' };
         currentSort = map[sortName] || 'hot';
         currentTag = document.querySelector('.topic-chip.active')?.textContent?.trim() || '全部';
-        renderPosts();
+        await renderPosts();
     };
 
     // 初始化
-    updateStats();
-    renderPosts();
+    (async function() {
+        await updateStats();
+        await renderPosts();
+    })();
     </script>
 </body>
 </html>
