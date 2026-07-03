@@ -88,8 +88,7 @@ const Posts = {
   },
   async create(data) {
     if (_apiOnline) {
-      const d = await _api('POST', '/posts', data);
-      return d.post || d;
+      try { const d = await _api('POST', '/posts', data); return d.post || d; } catch {}
     }
     return _PostsLocal.create(data);
   },
@@ -211,7 +210,7 @@ const Comments = {
   },
   async add({ postId, authorId, authorName, content }) {
     if (_apiOnline) {
-      return await _api('POST', `/posts/${postId}/comments`, { authorId, authorName, content });
+      try { return await _api('POST', `/posts/${postId}/comments`, { authorId, authorName, content }); } catch {}
     }
     return _CommentsLocal.add({ postId, authorId, authorName, content });
   },
