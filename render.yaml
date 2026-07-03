@@ -1,0 +1,23 @@
+# Render Blueprint — 一键部署 ThesisHub API
+# 使用方法：
+#   1. 打开 https://dashboard.render.com
+#   2. 点击 "New +" → "Blueprint"
+#   3. 选择 bbhxjm/thesis-forum 仓库
+#   4. 点击 "Apply" — 自动部署完成
+services:
+  - type: web
+    name: thesis-hub-api
+    env: node
+    region: singapore
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: "3001"
+      - key: NODE_VERSION
+        value: "18.18.0"
+      - key: NODE_ENV
+        value: production
