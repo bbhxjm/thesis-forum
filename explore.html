@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探索 · ThesisHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span>Thesis<span class="fw-300">Hub</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="explore.html" class="active">探索</a>
+                <a href="topics.html">话题</a>
+                <a href="about.html">关于</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-ghost">登录</a>
+                <a href="publish.html" class="btn btn-primary">发布帖子</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1>🔍 探索 ThesisHub</h1>
+            <p>发现学术工具、资源和社区功能</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="explore-grid">
+            <a href="templates.html" class="explore-card">
+                <div class="explore-icon">📄</div>
+                <h3>论文模板</h3>
+                <p>论文写作、文献综述、开题报告等模板，开箱即用</p>
+            </a>
+            <a href="topics.html" class="explore-card">
+                <div class="explore-icon">📌</div>
+                <h3>热门话题</h3>
+                <p>浏览所有学术话题分类，找到你感兴趣的方向</p>
+            </a>
+            <a href="index.html" class="explore-card">
+                <div class="explore-icon">🔥</div>
+                <h3>热门讨论</h3>
+                <p>查看当前最热门的学术讨论，获取最新洞见</p>
+            </a>
+            <a href="publish.html" class="explore-card">
+                <div class="explore-icon">✍️</div>
+                <h3>发布帖子</h3>
+                <p>分享你的学术经验、困惑或研究成果</p>
+            </a>
+            <a href="profile.html" class="explore-card">
+                <div class="explore-icon">👤</div>
+                <h3>个人主页</h3>
+                <p>管理你的资料、查看你的帖子和互动记录</p>
+            </a>
+            <a href="topics.html" class="explore-card">
+                <div class="explore-icon">📊</div>
+                <h3>学术工具推荐</h3>
+                <p>文献管理、统计分析、写作辅助等工具汇总</p>
+            </a>
+            <a href="about.html" class="explore-card">
+                <div class="explore-icon">ℹ️</div>
+                <h3>关于我们</h3>
+                <p>了解 ThesisHub 的使命、团队和技术栈</p>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">◈</span>
+                <span>ThesisHub</span>
+                <p class="footer-motto">学术路上，你不是一个人在战斗</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>平台</h4>
+                    <a href="about.html">关于我们</a>
+                    <a href="explore.html">使用指南</a>
+                    <a href="#">社区规范</a>
+                </div>
+                <div class="footer-col">
+                    <h4>资源</h4>
+                    <a href="explore.html">学术工具</a>
+                    <a href="topics.html">热门话题</a>
+                    <a href="templates.html">论文模板</a>
+                </div>
+                <div class="footer-col">
+                    <h4>联系</h4>
+                    <a href="about.html">意见反馈</a>
+                    <a href="about.html">合作邮箱</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+        </div>
+    </footer>
+
+    <!-- 回到顶部 -->
+    <button class="back-to-top">↑</button>
+
+    <!-- 移动端抽屉 -->
+    <div class="mobile-drawer-overlay"></div>
+    <div class="mobile-drawer">
+        <div class="mobile-drawer-header">
+            <span class="logo"><span class="logo-icon">◈</span> ThesisHub</span>
+            <button class="mobile-drawer-close">✕</button>
+        </div>
+        <div class="drawer-user">
+            <div class="avatar" style="background: linear-gradient(135deg, #6366f1, #818cf8)">?</div>
+            <div class="drawer-username">未登录</div>
+            <a href="login.html" class="btn btn-primary btn-sm" style="margin-top:12px;display:inline-flex">登录 / 注册</a>
+        </div>
+        <div class="drawer-links" style="margin-top:16px">
+            <a href="index.html" class="drawer-link">🏠 首页</a>
+            <a href="explore.html" class="drawer-link active">🔍 探索</a>
+            <a href="topics.html" class="drawer-link">📌 话题</a>
+            <a href="about.html" class="drawer-link">ℹ️ 关于</a>
+            <hr style="border-color:var(--border);margin:12px 0">
+            <a href="templates.html" class="drawer-link">📄 论文模板</a>
+            <hr style="border-color:var(--border);margin:12px 0">
+            <a href="publish.html" class="drawer-link">✍️ 发布帖子</a>
+            <a href="login.html" class="drawer-link">🔐 登录</a>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

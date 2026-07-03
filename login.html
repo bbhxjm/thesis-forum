@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 · ThesisHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ====== 导航栏 ====== -->
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">◈</span>
+                <span>Thesis<span class="fw-300">Hub</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="explore.html">探索</a>
+                <a href="topics.html">话题</a>
+                <a href="about.html">关于</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-ghost">登录</a>
+                <a href="publish.html" class="btn btn-primary">发布帖子</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <div class="auth-page">
+        <div class="auth-card">
+            <a href="index.html" class="logo" style="text-decoration:none">
+                <span class="logo-icon">◈</span>
+                <span>Thesis<span class="fw-300">Hub</span></span>
+            </a>
+            <p class="auth-subtitle">登录学术社区，和百万学者交流</p>
+
+            <!-- Tab 切换 -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">登录</button>
+                <button class="auth-tab" data-tab="register">注册</button>
+            </div>
+
+            <!-- 登录表单 -->
+            <form class="auth-form active" id="loginForm" autocomplete="off">
+                <div class="form-group">
+                    <label class="form-label">用户名 / 邮箱</label>
+                    <input class="form-input" type="text" id="loginUsername" placeholder="输入用户名或邮箱" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">密码</label>
+                    <input class="form-input" type="password" id="loginPassword" placeholder="输入密码" required />
+                </div>
+                <div class="form-error" id="loginError" style="display:none"></div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">登录</button>
+                <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--text-tertiary)">
+                    演示账号：demo / 123456
+                </div>
+            </form>
+
+            <!-- 注册表单 -->
+            <form class="auth-form" id="registerForm" autocomplete="off" style="display:none">
+                <div class="form-group">
+                    <label class="form-label">用户名</label>
+                    <input class="form-input" type="text" id="regUsername" placeholder="2-20个字符" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">邮箱</label>
+                    <input class="form-input" type="email" id="regEmail" placeholder="your@email.com" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">密码</label>
+                    <input class="form-input" type="password" id="regPassword" placeholder="至少6位密码" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">身份（选填）</label>
+                    <select class="form-select" id="regTitle">
+                        <option value="">请选择</option>
+                        <option value="本科一年级">本科一年级</option>
+                        <option value="本科二年级">本科二年级</option>
+                        <option value="本科三年级">本科三年级</option>
+                        <option value="本科四年级">本科四年级</option>
+                        <option value="硕士一年级">硕士一年级</option>
+                        <option value="硕士二年级">硕士二年级</option>
+                        <option value="硕士三年级">硕士三年级</option>
+                        <option value="博士一年级">博士一年级</option>
+                        <option value="博士二年级">博士二年级</option>
+                        <option value="博士三年级">博士三年级</option>
+                        <option value="青年教师">青年教师</option>
+                        <option value="研究员">研究员</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-error" id="regError" style="display:none"></div>
+                <button type="submit" class="btn btn-success btn-block btn-lg">注册新账号</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ====== 底部 ====== -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">◈</span>
+                <span>ThesisHub</span>
+                <p class="footer-motto">学术路上，你不是一个人在战斗</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>平台</h4>
+                    <a href="about.html">关于我们</a>
+                    <a href="explore.html">使用指南</a>
+                    <a href="#">社区规范</a>
+                </div>
+                <div class="footer-col">
+                    <h4>资源</h4>
+                    <a href="explore.html">学术工具</a>
+                    <a href="topics.html">热门话题</a>
+                    <a href="templates.html">论文模板</a>
+                </div>
+                <div class="footer-col">
+                    <h4>联系</h4>
+                    <a href="about.html">意见反馈</a>
+                    <a href="about.html">合作邮箱</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="auth.js"></script>
+    <script>
+    // =============================================
+    // 登录/注册页脚本
+    // =============================================
+
+    // 如果已登录，跳转首页
+    if (Auth.isLoggedIn()) {
+        window.location.href = 'index.html';
+    }
+
+    // Tab 切换
+    document.querySelectorAll('.auth-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            tab.classList.add('active');
+            const target = tab.dataset.tab;
+            if (target === 'login') {
+                document.getElementById('loginForm').classList.add('active');
+                document.getElementById('registerForm').classList.remove('active');
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+            } else {
+                document.getElementById('registerForm').classList.add('active');
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+            }
+        });
+    });
+
+    // 登录
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        const errorEl = document.getElementById('loginError');
+        errorEl.style.display = 'none';
+
+        const result = await Auth.login({ username, password });
+        if (result.ok) {
+            // 跳回之前页面或首页
+            const redirect = new URLSearchParams(window.location.search).get('redirect') || 'index.html';
+            window.location.href = redirect;
+        } else {
+            errorEl.textContent = result.msg;
+            errorEl.style.display = 'block';
+        }
+    });
+
+    // 注册
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('regUsername').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const title = document.getElementById('regTitle').value;
+
+        const errorEl = document.getElementById('regError');
+        errorEl.style.display = 'none';
+
+        const result = await Auth.register({ username, email, password, title });
+        if (result.ok) {
+            window.location.href = 'index.html';
+        } else {
+            errorEl.textContent = result.msg;
+            errorEl.style.display = 'block';
+        }
+    });
+    </script>
+</body>
+</html>
